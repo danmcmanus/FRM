@@ -1,48 +1,69 @@
 @model FRM.Models.Family
 
+
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>The <span>@Html.DisplayFor(model => model.Name)</span> Family</h2>
+@section Scripts{
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/js/app-family.js"></script>
+    <script src="~/js/FamilyCtrl.js"></script>
 
-<div>
-    <hr />
+}
+<div ng-app="app-family">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    Birthday
-                </th>
+    <div ng-controller="FamilyCtrl as vm" class="col-md-9">
+    <h2>The <span>@Html.DisplayFor(model => model.Name)</span> Family</h2>
 
-                <th></th>
+        <hr />
+
+        <table class="table table-responsive table-striped">
+            <tr ng-repeat="family in vm.familyMembers">
+                <td>{{family.name}} *Not Wired Up to Data Source*</td>
+                <td>{{family.birthday | date:shortDate}}</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-default">Manage</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.FamilyMembers)
-            {
+
+        </table>
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Birthday)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        
+                    </th>
+
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.FamilyMembers)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Birthday)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>

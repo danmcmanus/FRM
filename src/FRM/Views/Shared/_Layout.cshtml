@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,6 +17,23 @@
     </environment>
 </head>
 <body>
+@*<div id="sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <img src="~/img/user1.jpg" alt="http://placehold.it/800x1000" class="headshot" />
+            <span id="username">@User.Identity.Name</span>
+        }
+        <ul class="nav">
+        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a asp-controller="Home" asp-action="About">About</a></li>
+        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a asp-controller="Family" asp-action="Details">My Trips</a></li>
+            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+        }
+        </ul>
+        </div>*@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -42,6 +59,9 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+
+    </div>
+    <div class="container footer-content">
         <footer>
             <p>&copy; 2016 - FRM</p>
         </footer>
@@ -50,6 +70,7 @@
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
@@ -65,5 +86,7 @@
     </environment>
 
     @RenderSection("scripts", required: false)
+    <script src="~/js/app-family.js"></script>
+    <script src="~/js/FamilyCtrl.js"></script>
 </body>
 </html>
