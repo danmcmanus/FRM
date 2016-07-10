@@ -7,6 +7,7 @@
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "jqueri-ui": "1.11.4",
-    "polymer": "1.4.0"
+    "angular": "1.5.7",
+    "angular-ui": "0.4.0"
   }
 }
