@@ -1,92 +1,79 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FRM</title>
+    <title>@ViewData["Title"] - Home</title>
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
-@*<div id="sidebar">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <img src="~/img/user1.jpg" alt="http://placehold.it/800x1000" class="headshot" />
-            <span id="username">@User.Identity.Name</span>
-        }
+
+    <div id="sidebar">
         <ul class="nav">
-        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
-        <li><a asp-controller="Home" asp-action="About">About</a></li>
-        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
         @if (User.Identity.IsAuthenticated)
         {
-            <li><a asp-controller="Family" asp-action="Details">My Trips</a></li>
-            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+            <li><a>Hello, @User.Identity.Name</a></li>
         }
+            <li class="active"><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> home</a></li>
+            <li><a asp-controller="Home" asp-action="About"><i class="fa fa-question-circle-o"></i> about us</a></li>
+            <li><a asp-controller="Home" asp-action="Contact"><i class="fa fa-pencil-square-o"></i>  contact us</a></li>
+            <li>@await Html.PartialAsync("_LoginPartial")</li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="Family" asp-action="Index">My Family</a></li>
+            }
         </ul>
-        </div>*@
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">FRM</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Family" asp-action="Index">My Family</a></li>
+    </div>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">    
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <button id="sidebarToggle" class="btn btn-primary">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </li>
                 </ul>
-                @await Html.PartialAsync("_LoginPartial")
+                <ul class="nav navbar-nav navbar-center">
+                    <li class="header-text">Welcome</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fa fa-save"></i> Save
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fa fa-print"></i> Print
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="main" class="container-fluid">
+            <div>
+                @RenderBody()
+            </div>
+
+        </div>
+        <div id="footer" class="container-fluid">
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <h4 class="text-center text-info">&copy; 2016 Family Relationship Manager Ltd.</h4>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
 
-    </div>
-    <div class="container footer-content">
-        <footer>
-            <p>&copy; 2016 - FRM</p>
-        </footer>
-    </div>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
 
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    @RenderSection("Scripts", required: false)
 
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    @RenderSection("scripts", required: false)
-    <script src="~/js/app-family.js"></script>
-    <script src="~/js/FamilyCtrl.js"></script>
 </body>
 </html>

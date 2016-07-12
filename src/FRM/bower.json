@@ -8,6 +8,10 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "jqueri-ui": "1.11.4",
     "angular": "1.5.7",
-    "angular-ui": "0.4.0"
+    "angular-ui": "0.4.0",
+    "font-awesome": "4.6.1"
+  },
+  "resolutions": {
+    "angular": "^1.0.8"
   }
 }
