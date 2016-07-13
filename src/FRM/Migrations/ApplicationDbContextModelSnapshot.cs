@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using FRM.Data;
 
-namespace FRM.Data.Migrations
+namespace FRM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160708193627_v1")]
-    partial class v1
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -87,8 +86,6 @@ namespace FRM.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BelongsToFamilyName");
-
                     b.Property<DateTime>("Birthday");
 
                     b.Property<int?>("FamilyId");
@@ -96,6 +93,8 @@ namespace FRM.Data.Migrations
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
+
+                    b.Property<int>("RelationshipType");
 
                     b.Property<string>("Username");
 

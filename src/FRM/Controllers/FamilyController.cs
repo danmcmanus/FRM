@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FRM.Data;
 using FRM.Models;
 using FRM.Contracts;
+using FRM.ViewModels;
 
 namespace FRM.Controllers
 {
@@ -29,11 +30,30 @@ namespace FRM.Controllers
         }
 
         // GET: Family/Details/5
-        public IActionResult Details(int? id)
+        //public IActionResult Details(int? id)
+        //{
+        //    var model = _repository.GetDistinctFamilyWithMembers(id);
+        //    if (model != null)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    else
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //}
+
+        public IActionResult Details(int? id, FamilyViewModel model)
         {
-            var model = _repository.GetDistinctFamilyWithMembers(id);
-            if (model != null)
+            var _family = _repository.GetDistinctFamilyWithMembers(id);
+            if (_family != null)
             {
+                model = new FamilyViewModel()
+                {
+                    FamilyName = _family.Name,
+                    FamilyMembers = _family.FamilyMembers.ToList()
+                };
                 return View(model);
             }
 

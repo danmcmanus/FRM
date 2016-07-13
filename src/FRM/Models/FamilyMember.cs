@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace FRM.Models
 {
@@ -10,10 +11,12 @@ namespace FRM.Models
         public string LastName { get; set; }
         public string Username { get; set; }
 
-        [DisplayName("Family")]
-        public string BelongsToFamilyName { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
         public DateTime Birthday { get; set; }
+
+        [EnumDataType(typeof(RelationshipTypes))]
+        public RelationshipTypes RelationshipType { get; set; }
+
 
     }
 }

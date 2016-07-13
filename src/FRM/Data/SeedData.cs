@@ -29,8 +29,8 @@ namespace FRM.Data
         private IEnumerable<FamilyMember> GetFamilyMembers()
         {
             var familyMembers = new List<FamilyMember>();
-            FamilyMember sara = new FamilyMember() { FirstName = "Sara", LastName = "McManus", Birthday = new DateTime(1985,08,02) };
-            FamilyMember ella = new FamilyMember() { FirstName = "Ella", LastName = "McManus", Birthday = new DateTime(2014,11,13)};
+            FamilyMember sara = new FamilyMember() { FirstName = "Sara", LastName = "McManus", Birthday = new DateTime(1985,08,02), Username = "danmcmanus11", RelationshipType = RelationshipTypes.Wife };
+            FamilyMember ella = new FamilyMember() { FirstName = "Ella", LastName = "McManus", Birthday = new DateTime(2014,11,13), Username = "danmcmanus11", RelationshipType = RelationshipTypes.Daughter };
             familyMembers.Add(sara);
             familyMembers.Add(ella);
             return familyMembers;
